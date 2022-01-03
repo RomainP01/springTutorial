@@ -2,14 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    http://www.springframework.org/schema/beans/spring-beans.xsd" default-autowire="byType">
 
-    <bean id="movieRepository" class="com.mycompany.dvdstore.repository.FileMovieRepository"/>
-    <bean id="movieService" class="com.mycompany.dvdstore.service.DefaultMovieService">
-        <property name="movieRepository" ref="movieRepository" />
+    <bean class="com.mycompany.dvdstore.repository.FileMovieRepository">
+        <property name="file" value="C:\temp\movies.txt"/>
+    </bean>
+    <bean class="com.mycompany.dvdstore.service.DefaultMovieService">
+
     </bean>
     <bean class="com.mycompany.dvdstore.controller.MovieController">
-        <property name="movieService" ref="movieService"/>
+
     </bean>
 
 
