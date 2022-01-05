@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd" default-autowire="byType">
+    http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean class="com.mycompany.dvdstore.repository.FileMovieRepository">
-        <property name="file" value="C:\temp\movies.txt"/>
-    </bean>
-    <bean class="com.mycompany.dvdstore.service.DefaultMovieService">
-
-    </bean>
-    <bean class="com.mycompany.dvdstore.controller.MovieController">
-
-    </bean>
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath:application.properties"/>
+    <bean class="com.mycompany.dvdstore.repository.FileMovieRepository"/>
+    <bean class="com.mycompany.dvdstore.service.DefaultMovieService"/>
+    <bean class="com.mycompany.dvdstore.controller.MovieController"/>
 
 
 </beans>
