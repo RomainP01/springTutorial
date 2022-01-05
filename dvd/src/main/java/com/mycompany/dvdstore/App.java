@@ -1,20 +1,27 @@
 package com.mycompany.dvdstore;
 
-import com.mycompany.dvdstore.controller.MovieController;
 import com.mycompany.dvdstore.controller.MovieControllerInterface;
-import com.mycompany.dvdstore.repository.FileMovieRepository;
-import com.mycompany.dvdstore.service.DefaultMovieService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- * Hello world!
- *
- */
+@Configuration
+@ComponentScan(basePackages = {
+        "com.mycompany.dvdstore.controller",
+        "com.mycompany.dvdstore.service",
+        "com.mycompany.dvdstore.repository.file"
+})
+@PropertySource("classpath:application.properties")
+//@ImportResource("classpath:applicationContext.xml")
 public class App 
 {
     public static void main( String[] args )
     {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext context = new AnnotationConfigApplicationContext(App.class);
         MovieControllerInterface movieController = context.getBean(MovieControllerInterface.class);
         movieController.addUsingConsole();
 
