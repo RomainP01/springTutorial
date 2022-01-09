@@ -34,7 +34,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             for (String line; (line = br.readLine()) != null; ) {
                 final String[] titreEtGenre = line.split("\\;");
-                final Movie movie = new Movie(titreEtGenre[0], titreEtGenre[1]);
+                final Movie movie = new Movie(titreEtGenre[0], titreEtGenre[1], id, description);
                 movies.add(movie);
             }
         } catch (IOException e) {
