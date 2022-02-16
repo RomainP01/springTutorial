@@ -8,4 +8,5 @@ public interface MovieRepositoryInterface {
     void add(Movie movie);
 
     List<Movie> list();
+    Movie getById(long id);
 }

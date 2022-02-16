@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>A propos</title>
+    <title>Accueil</title>
 </head>
 <body>
 <div style="text-align:center">
@@ -11,12 +11,9 @@
 </div>
 <div style="margin-left:auto;margin-right:auto">
     <h1>La liste de nos dvds</h1>
-    <table>
-        <tr th:each="movie: ${movies}">
-            <td th:text="${movie.title}"></td>
-            <td th:text="${movie.genre}"></td>
-        </tr>
-    </table>
+        <div th:each="movie: ${movies}">
+            <a th:href="@{/movie/{id}(id=${movie.id})}" th:text="${movie.title}"></a>
+        </div>
 </div>
 </body>
 </html>

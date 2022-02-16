@@ -1,13 +1,19 @@
-package com.mycompany.dvdstore.controller;
+package com.mycompany.dvdstore.web.controller;
 
-import com.mycompany.dvdstore.entity.Movie;
-import com.mycompany.dvdstore.service.MovieServiceInterface;
+import com.mycompany.dvdstore.core.controller.MovieControllerInterface;
+import com.mycompany.dvdstore.core.entity.Movie;
+import com.mycompany.dvdstore.core.service.MovieServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Scanner;
 
+@RequestMapping("/movie")
+@Controller
 public class MovieController implements MovieControllerInterface {
     @Autowired
     MovieServiceInterface movieService;
@@ -17,16 +23,6 @@ public class MovieController implements MovieControllerInterface {
         return null;
     }
 
-    public void addUsingConsole(){
-
-        System.out.println("Name of the movie ? ");
-        Scanner sc = new Scanner(System.in);
-        String title = sc.nextLine();
-        System.out.println("Genre of the movie");
-        String genre = sc.nextLine();
-        Movie movie = new Movie(title,genre);
-        movieService.registerMovie(movie);
-    }
 
     public MovieServiceInterface getMovieService() {
         return movieService;
@@ -35,4 +31,12 @@ public class MovieController implements MovieControllerInterface {
     public void setMovieService(MovieServiceInterface movieService) {
         this.movieService = movieService;
     }
+
+    @RequestMapping("/{id}")
+    public ModelAndView displayMovieCard(@PathVariable("id") Long id){
+        System.out.println("movie details"+id);
+        ModelAndView mv = new ModelAndView("movie-details");
+        mv.addObject("movie",movieService.getMovieById(id));
+        return mv;
+    };
 }

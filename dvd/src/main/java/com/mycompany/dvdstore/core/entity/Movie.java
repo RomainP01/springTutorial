@@ -1,19 +1,25 @@
 package com.mycompany.dvdstore.core.entity;
 
-
 import lombok.Data;
 
 @Data
 public class Movie {
-    private final String title;
-    private final String genre;
-    private final Long id;
-    private final String description;
+    private Long id;
+    private String title;
+    private String genre;
+    private String description;
 
-    public Movie(String title, String genre, Long id, String description) {
+    public Movie(Long id,String title, String genre, String description) {
         this.title = title;
         this.genre = genre;
         this.id = id;
         this.description = description;
+    }
+
+    public Movie() {
+        this.title = null;
+        this.genre = null;
+        this.id = null;
+        this.description = null;
     }
 }
