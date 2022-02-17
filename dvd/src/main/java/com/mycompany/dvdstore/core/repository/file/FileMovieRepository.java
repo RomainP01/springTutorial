@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @Data
 @Repository
@@ -18,9 +19,11 @@ public class FileMovieRepository implements MovieRepositoryInterface {
     File file;
 
     public void add(Movie movie) {
+        long lastId = StreamSupport.stream(findAll().spliterator(), false).map(Movie::getId).max(Long::compare).orElse(0L);
+        movie.setId(lastId + 1);
         try {
             fileWriter = new FileWriter(file, true);
-            fileWriter.write(movie.getTitle() + ";" + movie.getGenre() + "\n");
+            fileWriter.write(movie.getId() + ";" + movie.getTitle() + ";" + movie.getGenre() + ";" + movie.getDescription() + "\n");
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,12 +50,12 @@ public class FileMovieRepository implements MovieRepositoryInterface {
     public Movie getById(long id) {
         final Movie movie = new Movie();
         movie.setId(id);
-        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-            for(String line; (line = br.readLine()) != null; ) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            for (String line; (line = br.readLine()) != null; ) {
 
                 final String[] allProperties = line.split("\\;");
-                final long nextMovieId=Long.parseLong(allProperties[0]);
-                if (nextMovieId==id) {
+                final long nextMovieId = Long.parseLong(allProperties[0]);
+                if (nextMovieId == id) {
                     movie.setTitle(allProperties[1]);
                     movie.setGenre(allProperties[2]);
                     movie.setDescription(allProperties[3]);
@@ -71,6 +74,30 @@ public class FileMovieRepository implements MovieRepositoryInterface {
         movie.setGenre("UNKNOWN");
         movie.setDescription("UNKNOWN");
         return movie;
+    }
+
+    public Iterable<Movie> findAll() {
+
+        List<Movie> movies = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            for (String line; (line = br.readLine()) != null; ) {
+                final Movie movie = new Movie();
+                final String[] allProperties = line.split("\\;");
+                movie.setId(Long.parseLong(allProperties[0]));
+                movie.setTitle(allProperties[1]);
+                movie.setGenre(allProperties[2]);
+                movies.add(movie);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.err.println("A movie from the file does not have a proper id");
+            e.printStackTrace();
+        }
+        return movies;
     }
 
 }
