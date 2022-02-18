@@ -9,7 +9,7 @@ public class Movie {
     private String genre;
     private String description;
 
-    public Movie(Long id,String title, String genre, String description) {
+    public Movie(Long id, String title, String genre, String description) {
         this.title = title;
         this.genre = genre;
         this.id = id;
@@ -17,9 +17,6 @@ public class Movie {
     }
 
     public Movie() {
-        this.title = null;
-        this.genre = null;
-        this.id = null;
-        this.description = null;
+
     }
 }
