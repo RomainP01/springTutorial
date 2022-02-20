@@ -1,29 +1,18 @@
 package com.mycompany.dvdstore.entitiy;
 
-import jakarta.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class MovieForm {
     private Long id;
-    @Size(max=20)
+    @NotBlank(message="Veuillez entrer un titre")
+    @Size(max = 20, message = "Entrez un titre de 20 caractères au plus")
     private String title;
+    @NotBlank(message = "Veuillez entrer un genre")
     private String genre;
+    @Size(max = 255,message = "Entrer une description de 255 caractères au plus")
     private String description;
-
-    public MovieForm(Long id, String title, String genre, String description) {
-        this.title = title;
-        this.genre = genre;
-        this.id = id;
-        this.description = description;
-    }
-
-    public MovieForm() {
-        this.title = null;
-        this.genre = null;
-        this.id = null;
-        this.description = null;
-    }
-
 
 }

@@ -2,16 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>A propos</title>
+    <title>Ajouter un film</title>
 </head>
 <body>
 <div style="text-align:center">
-    <h1 th:text="${movie.title}"></h1>
+<form th:action="@{/movie/add}" th:object="${movieForm}" method="POST">
+    <p>Titre<input type="text" th:field="*{title}"></p>
+    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+    <select th:field="*{genre}">
 
-</div>
-<div style="margin-left:auto;margin-right:auto">
-   <h2 th:text="${movie.genre}"></h2>
-    <p th:text="${movie.description}"></p>
+        <option th:value="COMEDIE" th:text="Comédie"></option>
+
+        <option th:value="HORREUR" th:text="Horreur"></option>
+
+        <option th:value="THRILLER" th:text="Thriller"></option>
+
+        <option th:value="ACTION" th:text="Action"></option>
+
+        <option th:value="ROMANTIQUE" th:text="Romantique"></option>
+
+        <option th:value="DRAME" th:text="Drame"></option>
+
+        <option th:value="ANIMATION" th:text="Animation"></option>
+
+    </select>
+    <div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
+    <p>Description<textarea th:field="*{description}"></textarea></p>
+    <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+    <input type="submit" value="ok"/>
+
+</form>
 </div>
 </body>
 </html>
