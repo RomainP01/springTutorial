@@ -1,4 +1,4 @@
-package com.mycompany.dvdstore.web.controller;
+package com.mycompany.dvdstore.api;
 
 import com.mycompany.dvdstore.core.controller.MovieControllerInterface;
 import com.mycompany.dvdstore.core.entity.Movie;
@@ -14,8 +14,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/movie")
-@Controller
-public class MovieController implements MovieControllerInterface {
+@RestController
+public class MovieResource implements MovieControllerInterface {
     @Autowired
     MovieServiceInterface movieService;
 
@@ -33,24 +33,19 @@ public class MovieController implements MovieControllerInterface {
         this.movieService = movieService;
     }
 
-    /*@GetMapping("/{id}")
-    public ModelAndView displayMovieCard(@PathVariable("id") Long id){
-        System.out.println("movie details"+id);
-        ModelAndView mv = new ModelAndView("movie-details");
-        mv.addObject("movie",movieService.getMovieById(id));
-        return mv;
+
+    @GetMapping("")
+    public @ModelAttribute("movies") List<Movie> list(){
+        return movieService.getMovieList();
+    }
+
+    @GetMapping("/{id}")
+    public Movie get(@PathVariable("id") Long id){
+        return movieService.getMovieById(id);
     };
 
     @PostMapping("/add")
-    public String addMovie(@Valid @ModelAttribute MovieForm movieForm, BindingResult result){
-        if (result.hasErrors()){
-            return "add-movie-form";
-        }
-        Movie movie = new Movie();
-        movie.setTitle(movieForm.getTitle());
-        movie.setGenre(movieForm.getGenre());
-        movie.setDescription(movieForm.getDescription());
-        movieService.registerMovie(movie);
-        return "movie-added";
-    }*/
+    public Movie add(@RequestBody Movie movie, BindingResult result){
+        return movieService.registerMovie(movie);
+    }
 }

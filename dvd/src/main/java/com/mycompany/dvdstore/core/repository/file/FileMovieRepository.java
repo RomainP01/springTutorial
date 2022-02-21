@@ -18,7 +18,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
     @Value("${movies.file.location}")
     File file;
 
-    public void add(Movie movie) {
+    public Movie add(Movie movie) {
         long lastId = StreamSupport.stream(findAll().spliterator(), false).map(Movie::getId).max(Long::compare).orElse(0L);
         movie.setId(lastId + 1);
         try {
@@ -28,6 +28,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return movie;
     }
 
     @Override

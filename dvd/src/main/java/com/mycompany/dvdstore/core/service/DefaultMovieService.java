@@ -11,8 +11,8 @@ import java.util.List;
 public class DefaultMovieService implements MovieServiceInterface{
     @Autowired
     MovieRepositoryInterface movieRepository ;
-    public void registerMovie(Movie movie){
-        movieRepository.add(movie);
+    public Movie registerMovie(Movie movie){
+        return movieRepository.add(movie);
     }
 
     @Override
