@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface MovieControllerInterface {
 
-    List<Movie> displayHome();
+    void  displayHome();
 }
