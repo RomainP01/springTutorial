@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.stream.StreamSupport;
 
 @Data
-@Repository
 public class FileMovieRepository implements MovieRepositoryInterface {
     FileWriter fileWriter;
     @Value("${movies.file.location}")
