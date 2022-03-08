@@ -1,5 +1,5 @@
 package com.mycompany.dvdstore.core.repository.mysql;
-
+/*
 import com.mycompany.dvdstore.core.entity.Movie;
 import com.mycompany.dvdstore.core.repository.MovieRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Repository
-public class MovieRepository implements MovieRepositoryInterface {
-    @Autowired
+public class MovieRepository implements MovieRepositoryInterface {@Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
@@ -47,4 +47,4 @@ public class MovieRepository implements MovieRepositoryInterface {
                 new Object[]{id},
                 (rs,rowNum)-> new Movie(rs.getLong("ID"),rs.getString("TITLE"), rs.getString("GENRE"), rs.getString("DESCRIPTION")));
     }
-}
+}*/
