@@ -20,8 +20,7 @@ public class MovieController implements MovieControllerInterface {
     MovieServiceInterface movieService;
 
     @Override
-    public List<Movie> displayHome() {
-        return null;
+    public void displayHome() {
     }
 
 
@@ -39,9 +38,9 @@ public class MovieController implements MovieControllerInterface {
         ModelAndView mv = new ModelAndView("movie-details");
         mv.addObject("movie",movieService.getMovieById(id));
         return mv;
-    };
+    };*/
 
-    @PostMapping("/add")
+    @PostMapping("/addmovie")
     public String addMovie(@Valid @ModelAttribute MovieForm movieForm, BindingResult result){
         if (result.hasErrors()){
             return "add-movie-form";
@@ -52,5 +51,5 @@ public class MovieController implements MovieControllerInterface {
         movie.setDescription(movieForm.getDescription());
         movieService.registerMovie(movie);
         return "movie-added";
-    }*/
+    }
 }

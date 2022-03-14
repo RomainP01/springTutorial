@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/movie")
 @RestController
@@ -20,8 +21,7 @@ public class MovieResource implements MovieControllerInterface {
     MovieServiceInterface movieService;
 
     @Override
-    public List<Movie> displayHome() {
-        return null;
+    public void displayHome() {
     }
 
 
@@ -34,17 +34,17 @@ public class MovieResource implements MovieControllerInterface {
     }
 
 
-    @GetMapping("")
-    public @ModelAttribute("movies") List<Movie> list(){
+    @GetMapping
+    public Iterable<Movie> list(){
         return movieService.getMovieList();
     }
 
     @GetMapping("/{id}")
-    public Movie get(@PathVariable("id") Long id){
+    public Optional<Movie> get(@PathVariable("id") Long id){
         return movieService.getMovieById(id);
     };
 
-    @PostMapping("/add")
+    @PostMapping
     public Movie add(@RequestBody Movie movie, BindingResult result){
         return movieService.registerMovie(movie);
     }

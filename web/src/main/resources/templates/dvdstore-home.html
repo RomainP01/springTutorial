@@ -3,19 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Accueil</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
-<div style="text-align:center">
-    <h1>La boutique de dvd en ligne ! </h1>
-
-</div>
-<div style="margin-left:auto;margin-right:auto">
+<H1>DVDStore : LA boutique de DVD en ligne</H1>
+<p>
     <a href="add-movie-form">Ajouter un film</a>
-    <h1>La liste de nos dvds</h1>
-        <div th:each="movie: ${movies}">
-            <a th:href="@{/movie/{id}(id=${movie.id})}" th:text="${movie.title}"></a>
-        </div>
+</p>
 
-</div>
+<section class="container">
+    <div class="left-half">
+        <article id="movie-list">
+
+        </article>
+    </div>
+    <div class="right-half">
+        <article id="movie-detail">
+
+        </article>
+    </div>
+</section>
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 </head>
 <body>
 <div style="text-align:center">
-<form th:action="@{/movie/add}" th:object="${movieForm}" method="POST">
+<form th:action="@{/movie/addmovie}" th:object="${movieForm}" method="POST">
     <p>Titre<input type="text" th:field="*{title}"></p>
     <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
     <select th:field="*{genre}">
